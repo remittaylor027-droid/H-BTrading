@@ -1,10 +1,43 @@
 "use client";
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '@/config/emailjs';
 
 const Footer = () => {
+  const newsletterRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterRef.current) return;
+
+    setIsSubmitting(true);
+    setStatus('idle');
+
+    emailjs.sendForm(
+      EMAILJS_CONFIG.SERVICE_ID,
+      EMAILJS_CONFIG.TEMPLATE_ID_NEWSLETTER,
+      newsletterRef.current,
+      EMAILJS_CONFIG.PUBLIC_KEY
+    )
+    .then((result) => {
+      console.log('Newsletter subscription successful!', result.text);
+      setIsSubmitting(false);
+      setStatus('success');
+      newsletterRef.current?.reset();
+      setTimeout(() => setStatus('idle'), 5000);
+    }, (error) => {
+      console.error('Newsletter subscription failed:', error.text);
+      setIsSubmitting(false);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    });
+  };
+
   return (
     <footer id="contact" className={styles.footer}>
       <div className="container">
@@ -53,10 +86,15 @@ const Footer = () => {
           <div className={styles.footerNewsletter}>
             <h4 className={styles.footerHeading}>Stay Updated</h4>
             <p className={styles.newsletterDesc}>Subscribe to our newsletter for the latest immigration news.</p>
-            <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Email Address" className={styles.newsletterInput} required />
-              <button type="submit" className={styles.newsletterBtn}>→</button>
+            <form ref={newsletterRef} className={styles.newsletterForm} onSubmit={handleNewsletterSubmit}>
+              <input type="email" name="user_email" placeholder="Email Address" className={styles.newsletterInput} required />
+              <button type="submit" className={styles.newsletterBtn} disabled={isSubmitting}>
+                {isSubmitting ? '...' : '→'}
+              </button>
             </form>
+            {status === 'success' && <p style={{ color: '#10b981', fontSize: '0.85rem', marginTop: '0.5rem' }}>Subscribed successfully!</p>}
+            {status === 'error' && <p style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '0.5rem' }}>Try again later.</p>}
+            
             <div className={styles.contactInfo}>
               <p>📍 DHA phase, 3 60 K Block, Lahore, Pakistan</p>
               <p>📞 +92 327 7700016</p>
