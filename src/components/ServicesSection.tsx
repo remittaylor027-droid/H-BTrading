@@ -7,19 +7,19 @@ const services = [
     title: 'Work Permits',
     description: 'Unlock global career opportunities. We handle the complexities of work visa applications so you can focus on your professional growth.',
     image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80',
-    link: '#work-permits'
+    link: '/services#work-permits'
   },
   {
     title: 'Visit Visas',
     description: 'Explore the world with ease. Our experts ensure a smooth and hassle-free tourist visa process for your next adventure.',
     image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80',
-    link: '#visit-visas'
+    link: '/services#visit-visas'
   },
   {
     title: 'Study Visas',
     description: 'Shape your future with world-class education. We guide students through the entire study visa application journey.',
     image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80',
-    link: '#study-visas'
+    link: '/services#study-visas'
   }
 ];
 
@@ -34,7 +34,7 @@ const ServicesSection = () => {
         
         <div className={`${styles.cardsGrid} reveal-stagger`}>
           {services.map((service, index) => (
-            <div key={index} className={styles.serviceCard}>
+            <div key={index} id={service.link.split('#')[1]} className={styles.serviceCard}>
               <div className={styles.imageContainer}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={service.image} alt={service.title} className={styles.cardImage} />

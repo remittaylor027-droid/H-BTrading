@@ -76,10 +76,10 @@ const Footer = () => {
           <div className={styles.footerLinksGroup}>
             <h4 className={styles.footerHeading}>Immigration</h4>
             <ul className={styles.footerLinks}>
-              <li><Link href="#work-permits">Work Permits</Link></li>
-              <li><Link href="#visit-visas">Visit Visas</Link></li>
-              <li><Link href="#study-visas">Study Visas</Link></li>
-              <li><Link href="#business-visas">Business Visas</Link></li>
+              <li><Link href="/services#work-permits">Work Permits</Link></li>
+              <li><Link href="/services#visit-visas">Visit Visas</Link></li>
+              <li><Link href="/services#study-visas">Study Visas</Link></li>
+              <li><Link href="/services#services">Business Visas</Link></li>
             </ul>
           </div>
 
