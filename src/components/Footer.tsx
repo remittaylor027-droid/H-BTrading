@@ -98,7 +98,7 @@ const Footer = () => {
             <div className={styles.contactInfo}>
               <p>📍 DHA phase, 3 60 K Block, Lahore, Pakistan</p>
               <p>📞 +92 327 7700016</p>
-              <p>✉️ info@h&btrading.com</p>
+              <p>✉️ info@hb-trading.com</p>
             </div>
           </div>
 

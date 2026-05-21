@@ -47,7 +47,7 @@ export default function ContactPage() {
               
               <div className={styles.infoBlock}>
                 <h3 className={styles.infoLabel}>✉️ Email Address</h3>
-                <p className={styles.infoText}>info@h&btrading.com</p>
+                <p className={styles.infoText}>info@hb-trading.com</p>
               </div>
 
               <div className={styles.infoBlock}>
